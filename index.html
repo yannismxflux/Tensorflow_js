@@ -13,28 +13,31 @@
     <nav class="navbar is-flex is-justify-content-space-between py-auto has-background-primary-dark" role="navigation"
         aria-label="main navigation">
         <a class="ml-6 py-3 is-flex" href=""><img src="assets/img/NONO.png" alt="">
-            <h1 class="title is-2 has-text-white  ml-5 mt-5">NONO</h1>
+            <h1 class="title is-2 has-text-white  ml-5 mt-5">NoNo</h1>
         </a>
         <a class="my-auto mr-5" href=""><img src="assets/img/Hamburguer.png" alt=""></a>
 
     </nav>
-    <section class="container hero  is-fluid">
+    <section class="container is-fluid ">
 
-        <h2 class="title hero-head has-text-centered">Détection d'objet avec coco-ssd</h2>
-        <div class="columns hero-body p-0 pb-4">
-            <div class="column  ">
-                <figure   >
-                    <video id="webcam" class="m-auto"  autoplay muted ></video>
-                </figure>
+        <h2 class="title hero-head has-text-centered ">Détection d'objet avec coco-ssd</h2>
+        <div class="columns hero-body mt-4 p-0 pb-4">
+            <div class="column p-0 is-flex is-justify-content-center">
+                <div id="liveView" >
+                    <video id="webcam"   autoplay muted ></video>
+                    
+                </div>
             </div>
             <div class="controllers  column has-background-light is-one-quarter  ">
                 <div class="on/off block px-5 py-4 is-flex is-justify-content-space-between">
-                    <button id="on" class="button py-5 has-background-primary"><img src="assets/img/play_arrow.png"
+                    <button id="on" class="button py-5 has-background-primary-dark"><img src="assets/img/play_arrow.png"
                             alt=""></button>
-                    <button id="off" class="button py-5 has-background-primary"><img src="/assets/img/videocam_off.png"
+                    <button id="off" class="button py-5 has-background-primary-dark"><img src="/assets/img/videocam_off.png"
                             alt=""></button>
                 </div>
-                <div class="detected block"></div>
+                <div class="detected block">
+                    
+                </div>
             </div>
         </div>
     </section>

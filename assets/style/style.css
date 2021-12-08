@@ -1,9 +1,7 @@
 
 @import "https://cdn.jsdelivr.net/npm/bulma@0.9.3/css/bulma.min.css";
-*{
-    margin: 0;
-    padding:0;
-}
+@import url('https://fonts.googleapis.com/css2?family=Zen+Kaku+Gothic+Antique&display=swap');
+
 html,
 body {
     min-height: 100vh;
@@ -14,20 +12,44 @@ body > footer {
     margin-top: auto;
     
 }
+h1
+{
+    font-family: 'Zen Kaku Gothic Antique';
+}
 .myfooter
 {
-    height: 50px;
+    height: 10vh;
 }
 
 #webcam
 {
-    border-radius: 40px;
-    width: 640px;
+    border-radius: 3%;
 }
 .controllers
 {
-    border-radius: 40px;
+    border-radius: 3%;
 }
 .button{
     border: none;
+}
+.detected p{
+    text-transform: capitalize;
+    text-align: center;
+}
+#liveView
+{
+    position: relative;
+}
+#highlighter
+{
+    position: absolute;
+}
+.highlighter
+{
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: 2;
+    color: white;
+    background-color: rgba(255, 255, 255, 0.385);
 }
