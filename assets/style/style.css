@@ -24,6 +24,7 @@ h1
 #webcam
 {
     border-radius: 3%;
+  
 }
 .controllers
 {
@@ -50,6 +51,20 @@ h1
     top: 0;
     left: 0;
     z-index: 2;
-    color: white;
-    background-color: rgba(255, 255, 255, 0.385);
+    color: rgb(255, 255, 255);
+    background-color: rgba(0, 255, 21, 0.385);
+    border-radius: 3%;
+    text-align: center;
+    
+    
+    
+}
+.highlighter p 
+{   border-radius: 3%;
+    background-color: rgb(187, 2, 2);
+    font-size: 32px;
+    text-transform: uppercase;
+    font-family: 'Zen Kaku Gothic Antique';
+    font-weight: bolder;
+
 }

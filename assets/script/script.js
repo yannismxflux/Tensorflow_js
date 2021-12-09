@@ -20,11 +20,14 @@ if (getUserMediaSupported()) {
   onButton.addEventListener("click", enableCam);
 } else {
   console.warn("getUserMedia() is not supported by your browser");
+
 }
 
 function predictWebcam() {
   // Now let's start classifying a frame in the stream.
-  result.innerHTML = "";
+  result.innerHTML = "<h3>Objets détectés</h3>";
+ 
+  
   if (isActive) {
     model.detect(video).then(function (predictions) {
       // Remove any highlighting we did previous frame.
@@ -33,7 +36,7 @@ function predictWebcam() {
       }
       children.splice(0);
       for (let index = 0; index < predictions.length; index++) {
-        if (predictions[index].score > 0.66) {
+        if (predictions[index].score > 0.65) {
           let score = Math.round(parseFloat(predictions[index].score) * 100);
           let label = predictions[index].class;
           result.innerHTML +=
@@ -59,16 +62,22 @@ function predictWebcam() {
             "px; height: " +
             predictions[index].bbox[3] +
             "px;";
+            highlighter.innerHTML="<p>"+label+"</p>"
 
           liveView.appendChild(highlighter);
           children.push(highlighter)
+         
+          
           // liveView.appendChild(p);
         } else {
           result.innerHTML;
         }
       }
     });
-    window.requestAnimationFrame(predictWebcam);
+     window.requestAnimationFrame(predictWebcam);
+  }
+  else{
+      liveView.removeChild(highlighter)
   }
 }
 
