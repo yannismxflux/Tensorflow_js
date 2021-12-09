@@ -68,17 +68,16 @@ function predictWebcam() {
           children.push(highlighter)
          
           
-          // liveView.appendChild(p);
+          
         } else {
-          result.innerHTML;
+          result.innerHTML="";
         }
       }
     });
      window.requestAnimationFrame(predictWebcam);
   }
-  else{
-      liveView.removeChild(highlighter)
-  }
+  
+  
 }
 
 function enableCam(event) {
@@ -99,7 +98,7 @@ function enableCam(event) {
   });
 }
 function cameraOff() {
-  isActive = false;
+  isActive = false;  
   const tracks = video.srcObject.getTracks();
   tracks.forEach(function (track) {
     track.stop();
