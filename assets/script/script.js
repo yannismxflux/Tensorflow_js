@@ -1,3 +1,7 @@
+
+// Inititialisation 
+
+
 const onButton = document.querySelector("#on");
 const offButton = document.querySelector("#off");
 const liveView = document.querySelector("#liveView");
@@ -12,7 +16,10 @@ var loading = document.querySelector("#loading");
 
 cocoSsd.load().then(function (loadedModel) {
   model = loadedModel;
-  loading.style = "display:none!important";
+  setTimeout(function() {
+    loading.style = "display:none!important";
+  }, 3000)
+  
 
   console.log("it's okay");
 });
@@ -49,6 +56,7 @@ function predictWebcam() {
           let label = predictions[index].class;
 
           // Partie progress bar
+
           result.innerHTML +=
             `<p class="mb-2"><b>` +
             label +
@@ -60,9 +68,10 @@ function predictWebcam() {
             `" max="100"></progress></p>`;
 
           // Partie Highlighter
-          const highlighter = document.createElement("div");
-          highlighter.setAttribute("class", "highlighter");
-          highlighter.style =
+
+          const bbox = document.createElement("div");
+          bbox.setAttribute("class", "bbox");
+          bbox.style =
             "left: " +
             predictions[index].bbox[0] +
             "px; top: " +
@@ -72,20 +81,23 @@ function predictWebcam() {
             "px; height: " +
             predictions[index].bbox[3] +
             "px;";
-          highlighter.innerHTML = "<p>" + label + " " + score + "%</p>";
+          bbox.innerHTML = "<p>" + label + " " + score + "%</p>";
 
-          liveView.appendChild(highlighter);
-          children.push(highlighter);
+          liveView.appendChild(bbox);
+          children.push(bbox);
         }
       }
     });
-    // Recursion de la fonction au rafraichissement de la fenetre
 
-    window.requestAnimationFrame(predictWebcam);
+    // Recursion de la fonction 60fps
+    setTimeout(function() {
+      predictWebcam()
+    }, 1000/16.66)
+    
   }
 }
 
-// Fonction "on" de la fonction
+// Fonction "on" camera
 
 function enableCam(event) {
   // Only continue if the COCO-SSD has finished loading.
