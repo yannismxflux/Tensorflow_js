@@ -1,2 +1,2 @@
 # Tensorflow_js
-## Petit exo web integration d'un model de detection d'objet dans un projet web 
+## Petit exo web: integration d'un model de detection d'objet 

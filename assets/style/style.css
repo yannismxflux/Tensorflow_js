@@ -1,67 +1,81 @@
 
+/* Import de Bulma  */
 @import "https://cdn.jsdelivr.net/npm/bulma@0.9.3/css/bulma.min.css";
-@import url('https://fonts.googleapis.com/css2?family=Zen+Kaku+Gothic+Antique&display=swap');
+/* Import de fonts  */
+@import url("https://fonts.googleapis.com/css2?family=Zen+Kaku+Gothic+Antique&display=swap");
 
 html,
 body {
-    min-height: 100vh;
-    display: flex;
-    flex-direction: column;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
 }
 body > footer {
-    margin-top: auto;
-    
+  margin-top: auto;
 }
-h1
-{
-    font-family: 'Zen Kaku Gothic Antique';
+/* Navbar */
+nav {
+
 }
-.myfooter
-{
+h1 {
+  font-family: "Zen Kaku Gothic Antique";
+}
+
+
+/* Partie droite  */
+.controllers {
+  border-radius: 3%;
+}
+.button {
+  border: none;
+}
+.detected p {
+  text-transform: capitalize;
+  text-align: center;
+}
+
+/* Partie gauche */
+#liveView {
+  position: relative;
+}
+
+.highlighter {
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 2;
+  color: rgb(255, 255, 255);
+  background-color: rgba(0, 255, 21, 0.385);
+  border-radius: 3%;
+  text-align: center;
+}
+.highlighter p {
+  border-radius: 3%;
+  background-color: rgb(187, 2, 2);
+  font-size: 1rem;
+  text-transform: uppercase;
+  font-family: "Zen Kaku Gothic Antique";
+  font-weight: bolder;
+}
+
+
+/* Chargement de coco-ssd */
+#loading {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100vh;
+  z-index: 100;
+  padding: auto 0;
+}
+#loading figure {
+  margin: auto 0;
+}
+#loading img {
+  width: 150px;
+  margin: auto;
+}
+.myfooter {
     height: 10vh;
-}
-
-#webcam
-{
-    border-radius: 3%;
-  
-}
-.controllers
-{
-    border-radius: 3%;
-}
-.button{
-    border: none;
-}
-.detected p{
-    text-transform: capitalize;
-    text-align: center;
-}
-#liveView
-{
-    position: relative;
-}
-
-.highlighter
-{
-    position: absolute;
-    top: 0;
-    left: 0;
-    z-index: 2;
-    color: rgb(255, 255, 255);
-    background-color: rgba(0, 255, 21, 0.385);
-    border-radius: 3%;
-    text-align: center;
-    
-    
-    
-}
-.highlighter p 
-{   border-radius: 3%;
-    background-color: rgb(187, 2, 2);
-    font-size: 32px;
-    text-transform: uppercase;
-    font-family: 'Zen Kaku Gothic Antique';
-    font-weight: bolder;
-
-}
+  }

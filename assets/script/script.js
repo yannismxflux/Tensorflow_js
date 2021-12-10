@@ -1,18 +1,23 @@
 const onButton = document.querySelector("#on");
 const offButton = document.querySelector("#off");
-offButton.addEventListener("click", cameraOff);
 const liveView = document.querySelector("#liveView");
 var isActive = false;
 const result = document.querySelector(".detected");
 var children = [];
 const video = document.getElementById("webcam");
 var model = undefined;
+var loading = document.querySelector("#loading");
+
+// Chargement de coco-ssd
 
 cocoSsd.load().then(function (loadedModel) {
   model = loadedModel;
-  // Show demo section now model is ready to use.
+  loading.style = "display:none!important";
+
+  console.log("it's okay");
 });
 
+// Verif du support webcam
 function getUserMediaSupported() {
   return !!(navigator.mediaDevices && navigator.mediaDevices.getUserMedia);
 }
@@ -20,25 +25,30 @@ if (getUserMediaSupported()) {
   onButton.addEventListener("click", enableCam);
 } else {
   console.warn("getUserMedia() is not supported by your browser");
-
 }
+
+// Fonction de detection d'objet
 
 function predictWebcam() {
   // Now let's start classifying a frame in the stream.
-  result.innerHTML = "<h3>Objets détectés</h3>";
- 
-  
+  result.innerHTML =
+    "<h3 class='title is-4 has-text-center'>Objets détectés</h3>";
+
+  for (let i = 0; i < children.length; i++) {
+    liveView.removeChild(children[i]);
+
+  }
+  children.splice(0);
   if (isActive) {
     model.detect(video).then(function (predictions) {
       // Remove any highlighting we did previous frame.
-      for (let i = 0; i < children.length; i++) {
-        liveView.removeChild(children[i]);
-      }
-      children.splice(0);
+
       for (let index = 0; index < predictions.length; index++) {
         if (predictions[index].score > 0.65) {
           let score = Math.round(parseFloat(predictions[index].score) * 100);
           let label = predictions[index].class;
+
+          // Partie progress bar
           result.innerHTML +=
             `<p class="mb-2"><b>` +
             label +
@@ -49,7 +59,7 @@ function predictWebcam() {
             score +
             `" max="100"></progress></p>`;
 
-
+          // Partie Highlighter
           const highlighter = document.createElement("div");
           highlighter.setAttribute("class", "highlighter");
           highlighter.style =
@@ -62,23 +72,20 @@ function predictWebcam() {
             "px; height: " +
             predictions[index].bbox[3] +
             "px;";
-            highlighter.innerHTML="<p>"+label+"</p>"
+          highlighter.innerHTML = "<p>" + label + " " + score + "%</p>";
 
           liveView.appendChild(highlighter);
-          children.push(highlighter)
-         
-          
-          
-        } else {
-          result.innerHTML="";
+          children.push(highlighter);
         }
       }
     });
-     window.requestAnimationFrame(predictWebcam);
+    // Recursion de la fonction au rafraichissement de la fenetre
+
+    window.requestAnimationFrame(predictWebcam);
   }
-  
-  
 }
+
+// Fonction "on" de la fonction
 
 function enableCam(event) {
   // Only continue if the COCO-SSD has finished loading.
@@ -86,6 +93,7 @@ function enableCam(event) {
     return;
   }
   isActive = true;
+  console.log("Camera on");
   // getUsermedia parameters to force video but not audio.
   const constraints = {
     video: true,
@@ -97,12 +105,21 @@ function enableCam(event) {
     video.addEventListener("loadeddata", predictWebcam);
   });
 }
+
+// Fonction off
+
 function cameraOff() {
-  isActive = false;  
+  isActive = false;
+
   const tracks = video.srcObject.getTracks();
-  tracks.forEach(function (track) {
-    track.stop();
-  });
-  video.srcObject = null;
-  console.log("Camera Off");
-}
+  
+    tracks.forEach(function (track) {
+      track.stop();
+    });
+    video.srcObject = null;
+    console.log("Camera Off");
+    result.innerHTML = "";
+  }
+
+
+offButton.addEventListener("click", cameraOff);
